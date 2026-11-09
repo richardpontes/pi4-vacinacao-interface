@@ -35,6 +35,15 @@ def carregar_cobertura():
     cobertura = pd.concat(partes).merge(codigos, left_on="bairro", right_on="nm_bairro", how="left")
     return cobertura, codigos
 
+EXCLUIDOS = ["Farroupilha", "Praia de Belas", "Vila Conceição", "Pedra Redonda",
+             "Navegantes", "Agronomia"]
+CORES_NIVEL = {"Baixa": "#C0392B", "Intermediária": "#E0A526", "Alta": "#1E8C6E",
+               "Excluído": "#9E9E9E", "Dados insuficientes": "#E0E0E0"}
+
+
+@st.cache_data
+def carregar_clustering():
+    return pd.read_csv("dados/tb_clustering_cobertura_v3.csv")
 
 def fmt(n):
     return f"{n:,.0f}".replace(",", ".")
@@ -117,6 +126,58 @@ with aba2:
                "Em cinza: bairros excluídos por distorção no registro do endereço ou com menos de "
                "30 vacinados na faixa, número insuficiente para uma estimativa confiável.")
 
-for aba in (aba3, aba4):
-    with aba:
-        st.info("Em construção.")
+with aba3:
+    clus = carregar_clustering()
+    _, codigos = carregar_cobertura()
+    geo = carregar_mapa()
+
+    mapa = codigos.merge(clus, left_on="nm_bairro", right_on="bairro", how="left")
+    mapa["categoria"] = mapa["nivel_adesao"]
+    mapa.loc[mapa["nm_bairro"].isin(EXCLUIDOS), "categoria"] = "Excluído"
+    mapa["categoria"] = mapa["categoria"].fillna("Dados insuficientes")
+    n = mapa["categoria"].value_counts()
+    mapa["legenda"] = mapa["categoria"].map(lambda c: f"{c} ({n[c]} bairros)")
+
+    fig = px.choropleth_map(
+        mapa, geojson=geo, featureidkey="properties.CD_BAIRRO", locations="cd_bairro",
+        color="legenda",
+        color_discrete_map={f"{c} ({n[c]} bairros)": cor for c, cor in CORES_NIVEL.items() if c in n},
+        category_orders={"legenda": [f"{c} ({n[c]} bairros)" for c in CORES_NIVEL if c in n]},
+        hover_name="nm_bairro", hover_data={"cd_bairro": False, "legenda": False, "categoria": True},
+        labels={"categoria": "Nível"},
+        map_style="carto-positron", center={"lat": -30.12, "lon": -51.17}, zoom=10.0, height=750)
+    fig.update_traces(marker_line_color="white", marker_line_width=0.5)
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), legend_title_text="Nível de adesão")
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.subheader("Perfil médio de cada nível")
+    indicadores = {"inf_0a4": "Influenza<br>0 a 4 anos", "inf_60a69": "Influenza<br>60 a 69 anos",
+                   "inf_70mais": "Influenza<br>70 anos ou mais", "cov_60a69": "Covid<br>60 a 69 anos",
+                   "cov_70mais": "Covid<br>70 anos ou mais"}
+    perfil = (clus.groupby("nivel_adesao")[list(indicadores)].mean()
+                  .reindex(["Baixa", "Intermediária", "Alta"]).rename(columns=indicadores)
+                  .reset_index()
+                  .melt(id_vars="nivel_adesao", var_name="indicador", value_name="valor"))
+    fig2 = px.bar(perfil, x="indicador", y="valor", color="nivel_adesao", barmode="group",
+                  color_discrete_map=CORES_NIVEL, text_auto=".1f",
+                  labels={"indicador": "", "valor": "População vacinada, média dos bairros (%)",
+                          "nivel_adesao": "Nível de adesão"})
+    fig2.update_layout(separators=",.")
+    st.plotly_chart(fig2, use_container_width=True)
+
+    st.subheader("Bairros de cada nível")
+    colunas = st.columns(3)
+    for coluna, nivel in zip(colunas, ["Baixa", "Intermediária", "Alta"]):
+        lista = sorted(clus.loc[clus["nivel_adesao"] == nivel, "bairro"])
+        coluna.markdown(f"**{nivel} ({len(lista)} bairros)**")
+        coluna.markdown("\n".join(f"- {b}" for b in lista))
+
+    st.caption("Os níveis foram obtidos por agrupamento K-Means (K = 3) a partir de cinco indicadores "
+               "de população vacinada por bairro: influenza em 0 a 4, 60 a 69 e 70 anos ou mais, e "
+               "covid em 60 a 69 e 70 anos ou mais. Os grupos representam faixas de um gradiente "
+               "contínuo de vacinação, e não tipos de bairro distintos. Excluído: bairros com "
+               "distorção no registro do endereço. Dados insuficientes: bairros com menos de 30 "
+               "vacinados em algum dos cinco indicadores.")
+
+with aba4:
+    st.info("Em construção.")
