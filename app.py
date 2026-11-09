@@ -110,7 +110,9 @@ with aba2:
         geojson=geo, featureidkey="properties.CD_BAIRRO",
         locations=sel["cd_bairro"].tolist(), z=sel["cobertura_pct"].tolist(),
         colorscale="Blues", marker_line_color="white", marker_line_width=0.5,
-        colorbar_title="População<br>vacinada (%)",
+        # colorbar_title="População<br>vacinada (%)",
+        colorbar=dict(title="População<br>vacinada (%)", x=0.01, xanchor="left",
+                      y=0.02, yanchor="bottom", len=0.45, bgcolor="rgba(255,255,255,0.85)"),
         customdata=sel[["bairro", "pacientes_unicos", "populacao"]].values,
         hovertemplate=("<b>%{customdata[0]}</b><br>Vacinados: %{customdata[1]:,}"
                        "<br>População: %{customdata[2]:,}"
@@ -147,7 +149,10 @@ with aba3:
         labels={"categoria": "Nível"},
         map_style="carto-positron", center={"lat": -30.12, "lon": -51.17}, zoom=10.0, height=750)
     fig.update_traces(marker_line_color="white", marker_line_width=0.5)
-    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), legend_title_text="Nível de adesão")
+    # fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), legend_title_text="Nível de adesão")
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), legend_title_text="Nível de adesão",
+                      legend=dict(x=0.01, xanchor="left", y=0.02, yanchor="bottom",
+                                  bgcolor="rgba(255,255,255,0.85)"))
     st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("Perfil médio de cada nível")
