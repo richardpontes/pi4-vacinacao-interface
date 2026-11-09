@@ -1,0 +1,426 @@
+bairro,faixa_etaria,pacientes_unicos,populacao,cobertura_pct
+Cascata,0 a 4,217,544,39.9
+Passo da Areia,0 a 4,102,824,12.4
+Ponta Grossa,0 a 4,34,477,7.1
+Belém Novo,0 a 4,84,524,16.0
+Cristo Redentor,0 a 4,43,492,8.7
+Coronel Aparício Borges,0 a 4,154,1100,14.0
+Santa Tereza,0 a 4,270,1724,15.7
+Jardim Leopoldina,0 a 4,36,692,5.2
+Belém Velho,0 a 4,61,670,9.1
+Cascata,15 a 19,30,653,4.6
+Mário Quintana,15 a 19,34,3467,1.0
+Bom Jesus,25 a 29,35,2073,1.7
+Cascata,25 a 29,41,700,5.9
+Coronel Aparício Borges,50 a 59,74,1922,3.9
+Santa Maria Goretti,50 a 59,30,405,7.4
+Azenha,50 a 59,98,1549,6.3
+Arquipélago,60 a 69,37,568,6.5
+Tristeza,60 a 69,436,2539,17.2
+Vila João Pessoa,60 a 69,133,1193,11.1
+Bom Fim,60 a 69,150,1166,12.9
+Jardim Leopoldina,60 a 69,314,2397,13.1
+Belém Novo,60 a 69,183,1175,15.6
+Ponta Grossa,60 a 69,77,1025,7.5
+Auxiliadora,60 a 69,197,1246,15.8
+Vila Ipiranga,60 a 69,212,2576,8.2
+Teresópolis,60 a 69,183,1569,11.7
+Costa e Silva,60 a 69,139,1308,10.6
+Restinga,60 a 69,794,4695,16.9
+Moinhos de Vento,60 a 69,118,1644,7.2
+São João,60 a 69,239,1475,16.2
+Morro Santana,60 a 69,424,2084,20.3
+Cascata,60 a 69,238,897,26.5
+Rubem Berta,60 a 69,345,3094,11.2
+Cidade Baixa,60 a 69,351,1464,24.0
+Santa Maria Goretti,60 a 69,107,480,22.3
+Jardim Leopoldina,70 ou mais,318,1686,18.9
+Restinga,70 ou mais,745,3524,21.1
+Cristo Redentor,70 ou mais,364,2221,16.4
+Espírito Santo,70 ou mais,88,642,13.7
+Santa Tereza,70 ou mais,643,2736,23.5
+São Geraldo,70 ou mais,201,977,20.6
+Centro Histórico,70 ou mais,1109,4087,27.1
+Floresta,70 ou mais,419,1334,31.4
+Santa Maria Goretti,70 ou mais,133,463,28.7
+Aberta dos Morros,70 ou mais,101,806,12.5
+Passo da Areia,70 ou mais,698,3097,22.5
+Morro Santana,70 ou mais,471,1731,27.2
+Menino Deus,70 ou mais,933,5066,18.4
+Moinhos de Vento,70 ou mais,208,2375,8.8
+Rio Branco,70 ou mais,607,2555,23.8
+Cascata,70 ou mais,219,622,35.2
+Belém Velho,70 ou mais,148,760,19.5
+Jardim Sabará,70 ou mais,231,1628,14.2
+Santana,70 ou mais,582,2968,19.6
+Nonoai,70 ou mais,339,2298,14.8
+Arquipélago,70 ou mais,36,420,8.6
+Vila Assunção,70 ou mais,127,733,17.3
+Humaitá,70 ou mais,175,917,19.1
+Mário Quintana,70 ou mais,173,1619,10.7
+Bela Vista,70 ou mais,261,1980,13.2
+Belém Novo,70 ou mais,260,1032,25.2
+Costa e Silva,70 ou mais,119,1080,11.0
+Santa Cecília,70 ou mais,115,813,14.1
+Coronel Aparício Borges,70 ou mais,227,993,22.9
+Chácara das Pedras,70 ou mais,97,952,10.2
+Restinga,15 a 19,58,4933,1.2
+Mário Quintana,20 a 24,45,3899,1.2
+Partenon,20 a 24,45,3611,1.2
+Sarandi,25 a 29,40,3293,1.2
+Mário Quintana,25 a 29,49,3829,1.3
+Camaquã,30 a 39,36,2772,1.3
+Mário Quintana,30 a 39,88,6709,1.3
+Glória,30 a 39,30,2379,1.3
+Lomba do Pinheiro,15 a 19,62,4482,1.4
+Santa Rosa de Lima,20 a 24,37,2706,1.4
+Rubem Berta,20 a 24,30,2142,1.4
+Sarandi,20 a 24,47,3261,1.4
+Nonoai,30 a 39,42,2917,1.4
+Santa Rosa de Lima,30 a 39,75,5183,1.4
+Hípica,30 a 39,64,4482,1.4
+Vila Ipiranga,30 a 39,40,2669,1.5
+Glória,40 a 49,33,2148,1.5
+Petrópolis,20 a 24,31,1971,1.6
+Petrópolis,25 a 29,41,2504,1.6
+Hípica,40 a 49,91,5653,1.6
+Bom Jesus,20 a 24,38,2154,1.8
+Vila São José,20 a 24,37,2106,1.8
+Vila Nova,25 a 29,41,2220,1.8
+Santa Rosa de Lima,25 a 29,50,2787,1.8
+Teresópolis,30 a 39,33,1841,1.8
+Sarandi,30 a 39,137,7514,1.8
+Vila Nova,30 a 39,89,4831,1.8
+Humaitá,30 a 39,42,2311,1.8
+Santo Antônio,30 a 39,34,1905,1.8
+Sarandi,40 a 49,143,7933,1.8
+Vila Nova,20 a 24,42,2215,1.9
+Rubem Berta,30 a 39,78,4079,1.9
+Passo das Pedras,30 a 39,41,2119,1.9
+São João,30 a 39,30,1565,1.9
+Camaquã,40 a 49,52,2690,1.9
+Mário Quintana,40 a 49,120,6251,1.9
+Santa Rosa de Lima,40 a 49,89,4574,1.9
+Ipanema,50 a 59,36,1909,1.9
+Bom Jesus,30 a 39,68,3440,2.0
+Jardim Itu,40 a 49,54,2731,2.0
+Nonoai,40 a 49,62,3170,2.0
+Farrapos,40 a 49,44,2201,2.0
+Rubem Berta,25 a 29,45,2125,2.1
+Cavalhada,25 a 29,35,1640,2.1
+Jardim Carvalho,25 a 29,35,1691,2.1
+Petrópolis,30 a 39,123,5848,2.1
+Jardim Leopoldina,30 a 39,55,2621,2.1
+Menino Deus,30 a 39,89,4184,2.1
+Vila Nova,40 a 49,105,5005,2.1
+Jardim Sabará,40 a 49,35,1661,2.1
+Jardim Carvalho,20 a 24,38,1705,2.2
+Nonoai,25 a 29,30,1368,2.2
+Cavalhada,30 a 39,81,3696,2.2
+Costa e Silva,30 a 39,42,1892,2.2
+Vila Ipiranga,40 a 49,61,2807,2.2
+Costa e Silva,40 a 49,44,2022,2.2
+Cristal,20 a 24,42,1865,2.3
+Lomba do Pinheiro,20 a 24,113,4871,2.3
+Santa Tereza,20 a 24,55,2396,2.3
+Lomba do Pinheiro,25 a 29,106,4526,2.3
+Lomba do Pinheiro,30 a 39,196,8550,2.3
+Jardim Carvalho,30 a 39,84,3730,2.3
+Petrópolis,40 a 49,131,5793,2.3
+Mário Quintana,50 a 59,100,4383,2.3
+Vila São José,25 a 29,47,2000,2.4
+Vila João Pessoa,30 a 39,36,1499,2.4
+Jardim Itu,30 a 39,57,2400,2.4
+Partenon,30 a 39,152,6416,2.4
+Tristeza,30 a 39,55,2276,2.4
+Belém Velho,30 a 39,36,1529,2.4
+Cristo Redentor,30 a 39,57,2406,2.4
+Morro Santana,30 a 39,93,3820,2.4
+Bom Jesus,40 a 49,78,3317,2.4
+Glória,50 a 59,44,1812,2.4
+Bela Vista,50 a 59,40,1655,2.4
+Menino Deus,25 a 29,47,1910,2.5
+Belém Velho,40 a 49,38,1513,2.5
+Passo das Pedras,40 a 49,50,2036,2.5
+Vila Jardim,50 a 59,37,1487,2.5
+Jardim Itu,50 a 59,65,2594,2.5
+Vila Ipiranga,50 a 59,58,2299,2.5
+Restinga,20 a 24,136,5329,2.6
+Passo da Areia,25 a 29,38,1443,2.6
+Morro Santana,25 a 29,45,1751,2.6
+Cristal,30 a 39,91,3449,2.6
+Restinga,30 a 39,240,9270,2.6
+Farrapos,50 a 59,52,1983,2.6
+Passo da Areia,20 a 24,30,1112,2.7
+Centro Histórico,20 a 24,64,2409,2.7
+Restinga,25 a 29,139,5229,2.7
+Vila São José,30 a 39,94,3483,2.7
+Belém Novo,30 a 39,33,1215,2.7
+Bom Fim,30 a 39,50,1878,2.7
+São Sebastião,30 a 39,36,1330,2.7
+Santo Antônio,40 a 49,55,2025,2.7
+Cristal,25 a 29,50,1779,2.8
+Coronel Aparício Borges,25 a 29,37,1340,2.8
+Partenon,25 a 29,100,3593,2.8
+Medianeira,30 a 39,33,1183,2.8
+Coronel Aparício Borges,30 a 39,71,2517,2.8
+Restinga,40 a 49,240,8483,2.8
+Lomba do Pinheiro,40 a 49,239,8519,2.8
+Bom Fim,40 a 49,35,1257,2.8
+Cavalhada,40 a 49,108,3847,2.8
+Rubem Berta,40 a 49,111,4017,2.8
+Jardim Carvalho,40 a 49,102,3611,2.8
+Camaquã,50 a 59,62,2247,2.8
+Santa Rosa de Lima,50 a 59,114,4115,2.8
+Morro Santana,20 a 24,46,1583,2.9
+Santa Tereza,30 a 39,126,4314,2.9
+Auxiliadora,30 a 39,39,1349,2.9
+Teresópolis,40 a 49,57,1976,2.9
+Cristo Redentor,40 a 49,66,2264,2.9
+Aberta dos Morros,50 a 59,38,1309,2.9
+Vila Nova,50 a 59,120,4170,2.9
+Cidade Baixa,25 a 29,47,1570,3.0
+Passo da Areia,30 a 39,103,3440,3.0
+Jardim Botânico,30 a 39,57,1916,3.0
+Belém Novo,40 a 49,42,1408,3.0
+Menino Deus,40 a 49,124,4092,3.0
+Tristeza,40 a 49,82,2763,3.0
+Sarandi,50 a 59,203,6775,3.0
+Centro Histórico,25 a 29,103,3298,3.1
+Cristal,40 a 49,106,3451,3.1
+Ponta Grossa,50 a 59,36,1164,3.1
+Bom Jesus,50 a 59,82,2658,3.1
+Humaitá,40 a 49,62,1965,3.2
+Hípica,50 a 59,113,3530,3.2
+São João,40 a 49,54,1612,3.3
+Jardim Sabará,50 a 59,53,1586,3.3
+Cavalhada,50 a 59,103,3152,3.3
+Vila João Pessoa,50 a 59,41,1238,3.3
+Rio Branco,25 a 29,41,1196,3.4
+Vila João Pessoa,40 a 49,44,1304,3.4
+Jardim Leopoldina,40 a 49,78,2293,3.4
+Boa Vista,50 a 59,43,1256,3.4
+São Geraldo,30 a 39,39,1115,3.5
+Partenon,40 a 49,209,5968,3.5
+Belém Velho,50 a 59,48,1370,3.5
+Lomba do Pinheiro,50 a 59,232,6701,3.5
+Santana,25 a 29,58,1604,3.6
+Rio Branco,30 a 39,83,2278,3.6
+Azenha,30 a 39,76,2104,3.6
+Morro Santana,40 a 49,117,3289,3.6
+Passo das Pedras,50 a 59,62,1736,3.6
+Vila São José,40 a 49,116,3113,3.7
+Lami,50 a 59,31,829,3.7
+Cidade Baixa,30 a 39,101,2657,3.8
+Belém Novo,50 a 59,51,1354,3.8
+Teresópolis,50 a 59,67,1768,3.8
+Petrópolis,50 a 59,190,4981,3.8
+Santa Tereza,25 a 29,97,2403,4.0
+Azenha,40 a 49,68,1711,4.0
+Rio Branco,40 a 49,87,2182,4.0
+Coronel Aparício Borges,40 a 49,88,2196,4.0
+Santo Antônio,50 a 59,68,1700,4.0
+Santana,30 a 39,117,2842,4.1
+Medianeira,40 a 49,51,1249,4.1
+Santa Tereza,40 a 49,170,4165,4.1
+Rubem Berta,50 a 59,143,3530,4.1
+Centro Histórico,30 a 39,237,5689,4.2
+Nonoai,50 a 59,111,2669,4.2
+Humaitá,50 a 59,64,1517,4.2
+Independência,50 a 59,37,883,4.2
+Jardim Leopoldina,50 a 59,88,2088,4.2
+Jardim Itu,0 a 4,30,696,4.3
+Costa e Silva,50 a 59,75,1756,4.3
+Cristo Redentor,50 a 59,86,2008,4.3
+Auxiliadora,50 a 59,51,1187,4.3
+Menino Deus,50 a 59,158,3636,4.3
+Bom Fim,50 a 59,48,1108,4.3
+Jardim Botânico,40 a 49,76,1717,4.4
+Auxiliadora,40 a 49,59,1344,4.4
+Cristal,50 a 59,130,2977,4.4
+Santana,40 a 49,107,2392,4.5
+Passo da Areia,40 a 49,163,3649,4.5
+Floresta,25 a 29,33,702,4.7
+Jardim Carvalho,50 a 59,134,2881,4.7
+Restinga,50 a 59,298,6360,4.7
+Hípica,0 a 4,74,1556,4.8
+São Geraldo,40 a 49,52,1094,4.8
+Partenon,50 a 59,261,5325,4.9
+Mont Serrat,60 a 69,71,1435,4.9
+Tristeza,50 a 59,125,2491,5.0
+São Sebastião,50 a 59,47,936,5.0
+Cristal,0 a 4,65,1264,5.1
+Vila Nova,0 a 4,81,1586,5.1
+Jardim Botânico,50 a 59,74,1451,5.1
+Sarandi,0 a 4,133,2489,5.3
+Morro Santana,50 a 59,132,2491,5.3
+Vila Ipiranga,0 a 4,31,554,5.6
+Vila São José,50 a 59,147,2611,5.6
+Higienópolis,60 a 69,81,1448,5.6
+Farrapos,0 a 4,67,1181,5.7
+Glória,60 a 69,98,1729,5.7
+Floresta,30 a 39,71,1229,5.8
+Rio Branco,50 a 59,123,2138,5.8
+Cavalhada,0 a 4,70,1163,6.0
+Teresópolis,0 a 4,34,563,6.0
+Camaquã,0 a 4,51,838,6.1
+Cascata,20 a 24,46,759,6.1
+Vila Jardim,60 a 69,89,1454,6.1
+Cascata,30 a 39,82,1325,6.2
+Centro Histórico,40 a 49,268,4335,6.2
+Passo da Areia,50 a 59,185,2982,6.2
+São João,50 a 59,90,1457,6.2
+Nonoai,0 a 4,57,895,6.4
+Rubem Berta,0 a 4,96,1490,6.4
+Santa Tereza,50 a 59,232,3641,6.4
+Medianeira,50 a 59,76,1160,6.6
+Mont Serrat,70 ou mais,107,1618,6.6
+Santana,50 a 59,150,2228,6.7
+Lageado,60 a 69,38,564,6.7
+Cidade Baixa,40 a 49,117,1706,6.9
+Floresta,40 a 49,86,1239,6.9
+Mário Quintana,0 a 4,231,3307,7.0
+Costa e Silva,0 a 4,56,798,7.0
+Campo Novo,60 a 69,75,970,7.7
+Jardim Europa,60 a 69,32,415,7.7
+Guarujá,60 a 69,57,743,7.7
+Floresta,50 a 59,94,1200,7.8
+Jardim Lindóia,70 ou mais,108,1381,7.8
+Jardim Lindóia,60 a 69,88,1110,7.9
+Jardim Isabel,70 ou mais,32,407,7.9
+Lageado,0 a 4,30,377,8.0
+Cidade Baixa,50 a 59,124,1550,8.0
+Jardim Sabará,60 a 69,126,1584,8.0
+Mário Quintana,60 a 69,261,3262,8.0
+Santo Antônio,0 a 4,34,420,8.1
+Partenon,0 a 4,159,1954,8.1
+Chácara das Pedras,60 a 69,71,878,8.1
+Humaitá,0 a 4,60,706,8.5
+São Geraldo,50 a 59,82,968,8.5
+Vila São José,0 a 4,125,1405,8.9
+Tristeza,0 a 4,59,665,8.9
+Parque Santa Fé,60 a 69,72,806,8.9
+Cascata,40 a 49,114,1268,9.0
+Passo das Pedras,60 a 69,127,1412,9.0
+Santa Rosa de Lima,60 a 69,322,3573,9.0
+Higienópolis,70 ou mais,134,1486,9.0
+Centro Histórico,50 a 59,356,3888,9.2
+Nonoai,60 a 69,240,2596,9.2
+Três Figueiras,60 a 69,46,500,9.2
+Jardim Isabel,60 a 69,33,357,9.2
+Ipanema,60 a 69,188,2022,9.3
+Chapéu do Sol,60 a 69,44,471,9.3
+Farrapos,60 a 69,137,1479,9.3
+Glória,70 ou mais,151,1622,9.3
+Lomba do Pinheiro,0 a 4,354,3774,9.4
+Santa Rosa de Lima,0 a 4,189,2020,9.4
+Sarandi,60 a 69,544,5762,9.4
+Vila Nova,60 a 69,342,3602,9.5
+Bom Jesus,60 a 69,211,2230,9.5
+Petrópolis,0 a 4,132,1381,9.6
+Três Figueiras,70 ou mais,63,654,9.6
+Menino Deus,0 a 4,88,908,9.7
+Aberta dos Morros,60 a 69,110,1134,9.7
+Bela Vista,60 a 69,183,1870,9.8
+Jardim do Salso,70 ou mais,58,592,9.8
+São João,0 a 4,34,342,9.9
+Cascata,50 a 59,110,1113,9.9
+Camaquã,60 a 69,218,2197,9.9
+Serraria,60 a 69,45,449,10.0
+Vila Jardim,70 ou mais,127,1266,10.0
+Lami,0 a 4,46,455,10.1
+Bom Jesus,0 a 4,164,1625,10.1
+Jardim São Pedro,60 a 69,53,504,10.5
+Hípica,60 a 69,258,2458,10.5
+Bom Jesus,70 ou mais,176,1681,10.5
+Auxiliadora,0 a 4,32,296,10.8
+Lomba do Pinheiro,60 a 69,575,5304,10.8
+Espírito Santo,60 a 69,89,817,10.9
+Lami,60 a 69,72,659,10.9
+Jardim Itu,60 a 69,271,2488,10.9
+Chapéu do Sol,0 a 4,39,346,11.3
+Jardim do Salso,60 a 69,76,673,11.3
+Jardim Carvalho,0 a 4,154,1341,11.5
+Rio Branco,0 a 4,60,522,11.5
+Santo Antônio,60 a 69,190,1655,11.5
+Campo Novo,70 ou mais,75,652,11.5
+Boa Vista,60 a 69,147,1266,11.6
+Passo das Pedras,70 ou mais,139,1196,11.6
+Lageado,70 ou mais,42,361,11.6
+Sarandi,70 ou mais,610,5180,11.8
+Ipanema,70 ou mais,211,1794,11.8
+Jardim Botânico,0 a 4,46,379,12.1
+Farrapos,70 ou mais,119,981,12.1
+Cristo Redentor,60 a 69,278,2284,12.2
+Santa Rosa de Lima,70 ou mais,292,2401,12.2
+Belém Velho,60 a 69,131,1066,12.3
+Vila São José,60 a 69,290,2365,12.3
+Independência,60 a 69,112,889,12.6
+Partenon,60 a 69,626,4985,12.6
+Vila Ipiranga,70 ou mais,355,2825,12.6
+Cavalhada,60 a 69,381,3007,12.7
+Jardim Floresta,60 a 69,40,315,12.7
+Bom Fim,70 ou mais,199,1562,12.7
+Restinga,0 a 4,564,4405,12.8
+Petrópolis,60 a 69,664,5193,12.8
+Cidade Baixa,0 a 4,35,269,13.0
+Serraria,70 ou mais,40,308,13.0
+Jardim Carvalho,60 a 69,307,2263,13.6
+Guarujá,70 ou mais,79,579,13.6
+Morro Santana,0 a 4,166,1200,13.8
+Independência,70 ou mais,176,1274,13.8
+Chapéu do Sol,70 ou mais,37,269,13.8
+Cristal,60 a 69,421,2919,14.4
+Azenha,60 a 69,226,1566,14.4
+Vila Assunção,60 a 69,80,557,14.4
+Lami,70 ou mais,65,441,14.7
+Camaquã,70 ou mais,282,1916,14.7
+Santana,0 a 4,76,511,14.9
+Humaitá,60 a 69,199,1333,14.9
+Jardim Itu,70 ou mais,319,2145,14.9
+Boa Vista,70 ou mais,206,1378,14.9
+Floresta,0 a 4,40,262,15.3
+Santa Cecília,60 a 69,102,668,15.3
+Azenha,70 ou mais,245,1599,15.3
+Extrema,70 ou mais,36,227,15.9
+Lomba do Pinheiro,70 ou mais,542,3418,15.9
+Jardim Botânico,60 a 69,241,1494,16.1
+Coronel Aparício Borges,60 a 69,256,1589,16.1
+Jardim Europa,70 ou mais,66,411,16.1
+Jardim São Pedro,70 ou mais,93,577,16.1
+Ponta Grossa,70 ou mais,113,703,16.1
+Vila Nova,70 ou mais,433,2690,16.1
+Medianeira,0 a 4,51,307,16.6
+Passo da Areia,60 a 69,502,3029,16.6
+Parque Santa Fé,70 ou mais,102,616,16.6
+Jardim Floresta,70 ou mais,58,348,16.7
+Santo Antônio,70 ou mais,287,1722,16.7
+Petrópolis,70 ou mais,963,5756,16.7
+Menino Deus,60 a 69,665,3878,17.1
+Hípica,70 ou mais,284,1664,17.1
+Vila João Pessoa,70 ou mais,181,1060,17.1
+Vila São José,70 ou mais,310,1781,17.4
+Teresópolis,70 ou mais,274,1579,17.4
+Rubem Berta,70 ou mais,366,2109,17.4
+Santana,60 a 69,422,2389,17.7
+Cavalhada,70 ou mais,491,2772,17.7
+Medianeira,60 a 69,217,1183,18.3
+Partenon,70 ou mais,820,4493,18.3
+Santa Tereza,60 a 69,606,3254,18.6
+Rio Branco,60 a 69,419,2249,18.6
+Tristeza,70 ou mais,490,2634,18.6
+São Geraldo,0 a 4,38,203,18.7
+Cristal,70 ou mais,521,2793,18.7
+Vila João Pessoa,0 a 4,102,531,19.2
+Jardim Carvalho,70 ou mais,363,1890,19.2
+Centro Histórico,0 a 4,117,595,19.7
+São Sebastião,60 a 69,173,879,19.7
+São Geraldo,60 a 69,189,960,19.7
+Auxiliadora,70 ou mais,312,1580,19.7
+São João,70 ou mais,339,1718,19.7
+São Sebastião,70 ou mais,203,1013,20.0
+Jardim Botânico,70 ou mais,311,1552,20.0
+Centro Histórico,60 a 69,831,3803,21.9
+Medianeira,70 ou mais,281,1286,21.9
+Floresta,60 a 69,254,1117,22.7
+Cidade Baixa,70 ou mais,394,1738,22.7

@@ -1,0 +1,82 @@
+bairro,inf_0a4,inf_60a69,inf_70mais,cov_60a69,cov_70mais,grupo_k3,nivel_adesao
+Jardim Floresta,77.1,50.8,60.1,12.7,16.7,2,Alta
+Auxiliadora,78.0,62.5,71.6,15.8,19.7,2,Alta
+Passo da Areia,59.0,47.7,60.8,16.6,22.5,2,Alta
+Rio Branco,60.5,51.9,64.1,18.6,23.8,2,Alta
+São Geraldo,70.4,51.8,54.2,19.7,20.6,2,Alta
+Morro Santana,57.0,49.9,59.5,20.3,27.2,2,Alta
+Centro Histórico,64.7,52.9,59.1,21.9,27.1,2,Alta
+Santa Maria Goretti,61.9,54.8,68.3,22.3,28.7,2,Alta
+Floresta,74.8,63.7,83.0,22.7,31.4,2,Alta
+Cidade Baixa,63.9,50.7,49.4,24.0,22.7,2,Alta
+Cascata,89.9,71.7,95.5,26.5,35.2,2,Alta
+Mont Serrat,25.4,15.7,22.9,4.9,6.6,0,Baixa
+Higienópolis,20.3,20.1,26.7,5.6,9.0,0,Baixa
+Glória,18.4,23.8,32.8,5.7,9.3,0,Baixa
+Vila Jardim,56.1,38.8,46.4,6.1,10.0,0,Baixa
+Arquipélago,20.6,26.8,41.9,6.5,8.6,0,Baixa
+Lageado,32.9,24.8,39.3,6.7,11.6,0,Baixa
+Moinhos de Vento,35.4,27.6,35.2,7.2,8.8,0,Baixa
+Ponta Grossa,38.4,33.0,44.2,7.5,16.1,0,Baixa
+Campo Novo,41.8,34.2,44.9,7.7,11.5,0,Baixa
+Jardim Europa,29.9,40.0,45.0,7.7,16.1,0,Baixa
+Guarujá,37.2,29.2,43.2,7.7,13.6,0,Baixa
+Jardim Lindóia,35.8,32.0,37.7,7.9,7.8,0,Baixa
+Mário Quintana,41.3,34.1,49.1,8.0,10.7,0,Baixa
+Jardim Sabará,36.0,32.1,46.4,8.0,14.2,0,Baixa
+Chácara das Pedras,32.8,39.4,50.0,8.1,10.2,0,Baixa
+Vila Ipiranga,45.1,30.6,43.0,8.2,12.6,0,Baixa
+Passo das Pedras,37.0,34.4,39.7,9.0,11.6,0,Baixa
+Santa Rosa de Lima,41.9,32.8,40.6,9.0,12.2,0,Baixa
+Nonoai,46.3,34.9,47.9,9.2,14.8,0,Baixa
+Farrapos,39.5,36.6,38.6,9.3,12.1,0,Baixa
+Ipanema,36.7,33.9,44.4,9.3,11.8,0,Baixa
+Sarandi,51.4,38.7,46.1,9.4,11.8,0,Baixa
+Bom Jesus,46.5,36.5,41.3,9.5,10.5,0,Baixa
+Aberta dos Morros,38.3,32.3,41.7,9.7,12.5,0,Baixa
+Bela Vista,46.4,33.9,51.4,9.8,13.2,0,Baixa
+Camaquã,40.5,31.9,38.0,9.9,14.7,0,Baixa
+Jardim São Pedro,46.2,35.1,40.4,10.5,16.1,0,Baixa
+Santo Antônio,41.4,33.7,42.9,11.5,16.7,0,Baixa
+Bom Fim,53.6,33.9,38.0,12.9,12.7,0,Baixa
+Azenha,41.6,32.9,38.6,14.4,15.3,0,Baixa
+Santa Cecília,61.8,30.4,29.6,15.3,14.1,0,Baixa
+Parque Santa Fé,50.5,40.4,52.9,8.9,16.6,1,Intermediária
+Três Figueiras,43.4,47.8,56.3,9.2,9.6,1,Intermediária
+Chapéu do Sol,56.6,41.8,50.9,9.3,13.8,1,Intermediária
+Vila Nova,48.4,39.1,54.1,9.5,16.1,1,Intermediária
+Serraria,51.7,42.8,48.4,10.0,13.0,1,Intermediária
+Hípica,39.1,38.1,49.6,10.5,17.1,1,Intermediária
+Costa e Silva,49.9,52.1,54.7,10.6,11.0,1,Intermediária
+Lomba do Pinheiro,48.8,38.9,52.1,10.8,15.9,1,Intermediária
+Lami,41.1,37.0,61.2,10.9,14.7,1,Intermediária
+Jardim Itu,42.8,40.8,55.4,10.9,14.9,1,Intermediária
+Espírito Santo,64.5,44.7,50.2,10.9,13.7,1,Intermediária
+Vila João Pessoa,41.6,36.0,44.3,11.1,17.1,1,Intermediária
+Rubem Berta,64.3,48.2,60.5,11.2,17.4,1,Intermediária
+Jardim do Salso,47.9,40.1,52.4,11.3,9.8,1,Intermediária
+Boa Vista,45.7,40.5,48.9,11.6,14.9,1,Intermediária
+Teresópolis,41.2,40.2,42.7,11.7,17.4,1,Intermediária
+Cristo Redentor,43.5,36.7,45.5,12.2,16.4,1,Intermediária
+Belém Velho,49.6,41.5,51.2,12.3,19.5,1,Intermediária
+Vila São José,58.9,45.9,52.0,12.3,17.4,1,Intermediária
+Partenon,42.8,38.7,50.8,12.6,18.3,1,Intermediária
+Independência,60.3,37.1,42.9,12.6,13.8,1,Intermediária
+Cavalhada,50.6,41.6,51.9,12.7,17.7,1,Intermediária
+Petrópolis,54.2,38.5,48.2,12.8,16.7,1,Intermediária
+Jardim Leopoldina,44.4,38.3,54.9,13.1,18.9,1,Intermediária
+Jardim Carvalho,46.8,44.9,50.7,13.6,19.2,1,Intermediária
+Vila Assunção,41.9,42.9,51.2,14.4,17.3,1,Intermediária
+Cristal,42.7,42.8,52.6,14.4,18.7,1,Intermediária
+Humaitá,44.8,47.0,52.8,14.9,19.1,1,Intermediária
+Belém Novo,39.3,30.0,42.6,15.6,25.2,1,Intermediária
+Coronel Aparício Borges,42.2,47.8,65.1,16.1,22.9,1,Intermediária
+Jardim Botânico,55.9,42.1,51.8,16.1,20.0,1,Intermediária
+São João,56.7,47.8,51.9,16.2,19.7,1,Intermediária
+Restinga,45.2,39.7,45.6,16.9,21.1,1,Intermediária
+Menino Deus,47.0,42.7,48.2,17.1,18.4,1,Intermediária
+Tristeza,53.1,46.8,52.8,17.2,18.6,1,Intermediária
+Santana,54.0,42.6,47.1,17.7,19.6,1,Intermediária
+Medianeira,47.6,46.6,56.1,18.3,21.9,1,Intermediária
+Santa Tereza,53.6,42.3,53.5,18.6,23.5,1,Intermediária
+São Sebastião,39.3,47.2,51.0,19.7,20.0,1,Intermediária
