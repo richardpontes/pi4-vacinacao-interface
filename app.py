@@ -65,6 +65,7 @@ ESTILO = """
                  color: #5B6675; margin: 0;}
 .cartao .valor {font-size: 1.9rem; font-weight: 700; color: #1F2937; margin: 0.2rem 0;}
 .cartao .detalhe {font-size: 0.85rem; color: var(--cor); margin: 0;}
+.cartao .linha {font-size: 0.85rem; color: #374151; margin: 0.35rem 0 0 0;}
 button[data-baseweb="tab"] p {font-size: 1rem;}
 </style>
 """
@@ -80,8 +81,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-aba1, aba2, aba3, aba4 = st.tabs(["📊 Visão geral", "🗺️ Vacinação por bairro",
-                                  "🧭 Níveis de adesão", "📈 Séries temporais"])
+aba1, aba2, aba3, aba4, aba5, aba6 = st.tabs(["📊 Visão geral", "🗺️ Vacinação por bairro",
+                                              "🧭 Níveis de adesão", "📈 Séries temporais",
+                                              "🔎 Explorador de dados", "📚 Metodologia"])
 
 def cartao(rotulo, valor, detalhe, cor):
     return (f'<div class="cartao" style="--cor:{cor}"><p class="rotulo">{rotulo}</p>'
@@ -197,6 +199,30 @@ with aba3:
     clus = carregar_clustering()
     _, codigos = carregar_cobertura()
     geo = carregar_mapa()
+
+    def pct(x):
+        return f"{x:.1f}".replace(".", ",") + "%"
+
+    medias = clus.groupby("nivel_adesao")[["inf_0a4", "inf_60a69", "inf_70mais",
+                                            "cov_60a69", "cov_70mais"]].mean()
+    leitura = {"Baixa": "Menores proporções de vacinados nos cinco indicadores",
+               "Intermediária": "Proporções intermediárias nos cinco indicadores",
+               "Alta": "Maiores proporções de vacinados nos cinco indicadores"}
+    colunas_cartao = st.columns(3)
+    for coluna, nivel in zip(colunas_cartao, ["Baixa", "Intermediária", "Alta"]):
+        m = medias.loc[nivel]
+        n_b = (clus["nivel_adesao"] == nivel).sum()
+        coluna.markdown(
+            f'<div class="cartao" style="--cor:{CORES_NIVEL[nivel]}">'
+            f'<p class="rotulo">{n_b} bairros</p>'
+            f'<p class="valor">Adesão {nivel.lower()}</p>'
+            f'<p class="detalhe">{leitura[nivel]}</p>'
+            f'<p class="linha"><b>Influenza:</b> {pct(m.inf_0a4)} (0 a 4 anos) · '
+            f'{pct(m.inf_60a69)} (60 a 69) · {pct(m.inf_70mais)} (70 ou mais)</p>'
+            f'<p class="linha"><b>Covid:</b> {pct(m.cov_60a69)} (60 a 69 anos) · '
+            f'{pct(m.cov_70mais)} (70 ou mais)</p></div>',
+            unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     mapa = codigos.merge(clus, left_on="nm_bairro", right_on="bairro", how="left")
     mapa["categoria"] = mapa["nivel_adesao"]
@@ -320,3 +346,116 @@ with aba4:
                "com o modelo de menor RMSE, reajustado com toda a série até 25/09. O Dia D da "
                "Multivacinação (22/08) foi substituído por um sábado típico, para não distorcer os "
                "modelos. As previsões não consideram campanhas futuras nem feriados, como o de 12/10.")
+
+with aba5:
+    cobertura, codigos = carregar_cobertura()
+    clus = carregar_clustering()
+    pop = pd.read_csv("dados/dim_populacao_bairro.csv").groupby("nm_bairro")["populacao"].sum()
+
+    indicadores_tab = {("Influenza", "0 a 4"): "Influenza 0 a 4 anos (%)",
+                       ("Influenza", "60 a 69"): "Influenza 60 a 69 anos (%)",
+                       ("Influenza", "70 ou mais"): "Influenza 70 anos ou mais (%)",
+                       ("Covid", "60 a 69"): "Covid 60 a 69 anos (%)",
+                       ("Covid", "70 ou mais"): "Covid 70 anos ou mais (%)"}
+
+    tab = codigos[["nm_bairro"]].rename(columns={"nm_bairro": "Bairro"})
+    tab["População (Censo 2022)"] = tab["Bairro"].map(pop)
+    tab["Nível de adesão"] = tab["Bairro"].map(clus.set_index("bairro")["nivel_adesao"])
+    tab.loc[tab["Bairro"].isin(EXCLUIDOS), "Nível de adesão"] = "Excluído"
+    tab["Nível de adesão"] = tab["Nível de adesão"].fillna("Dados insuficientes")
+    for (vac, faixa_i), nome in indicadores_tab.items():
+        s = cobertura[(cobertura["vacina"] == vac) &
+                      (cobertura["faixa_etaria"] == faixa_i)].set_index("bairro")["cobertura_pct"]
+        tab[nome] = tab["Bairro"].map(s)
+    tab = tab.sort_values("Bairro")
+
+    colunas_pct = list(indicadores_tab.values())
+
+    c1, c2, c3 = st.columns([2, 2, 1])
+    busca = c1.text_input("Buscar bairro")
+    niveis = c2.multiselect("Nível de adesão", list(CORES_NIVEL), default=list(CORES_NIVEL))
+    ordem = c3.selectbox("Ordenar por", ["Bairro", "População (Censo 2022)"] + colunas_pct)
+
+    filtrada = tab[tab["Nível de adesão"].isin(niveis)]
+    if busca:
+        filtrada = filtrada[filtrada["Bairro"].str.contains(busca, case=False, na=False)]
+    if ordem == "Bairro":
+        filtrada = filtrada.sort_values("Bairro")
+    else:
+        filtrada = filtrada.sort_values(ordem, ascending=False, na_position="last")
+
+    exibir = filtrada.copy()
+    exibir["População (Censo 2022)"] = exibir["População (Censo 2022)"].map(
+        lambda v: f"{v:,.0f}".replace(",", "."))
+    for col in colunas_pct:
+        exibir[col] = exibir[col].map(lambda v: "—" if pd.isna(v) else f"{v:.1f}".replace(".", ","))
+    st.dataframe(exibir, hide_index=True, use_container_width=True, height=560)
+
+    st.caption(f"{len(filtrada)} de {len(tab)} bairros. —: sem dado, por ter menos de 30 vacinados "
+               "na faixa ou por ser bairro excluído por distorção no registro do endereço.")
+
+    st.download_button("Baixar tabela (CSV)",
+                       filtrada.to_csv(index=False, sep=";", decimal=",").encode("utf-8-sig"),
+                       file_name="vacinacao_por_bairro.csv", mime="text/csv")
+
+with aba6:
+    esq, dir_ = st.columns(2, gap="large")
+
+    with esq:
+        st.subheader("Arquitetura dos dados (camadas Bronze, Silver e Gold)")
+        st.markdown("""
+- **Bronze:** arquivos mensais brutos do PNI (janeiro a setembro de 2026), processados no Google Colab em partes e filtrados pelo **município de residência** do paciente (Porto Alegre), resultando em 1.156.680 registros.
+- **Silver** (`tb_vacinacao_poa_v3`): verificação de duplicidade por documento (nenhuma duplicata encontrada), padronização de tipos, datas e CEPs.
+- **Gold:** tabelas agregadas para as análises e para esta interface: série diária de doses, população vacinada por bairro e faixa etária (influenza e covid), indicadores e resultado do agrupamento.
+- **Dimensões:** `dim_cep_bairro`, com 10.116 CEPs de Porto Alegre e o bairro de cada um, e `dim_populacao_bairro`, com a população por bairro e faixa etária (IBGE, Censo 2022).
+
+O processamento foi feito no Google BigQuery e no Google Colab. Esta interface lê arquivos exportados das tabelas Gold.
+""")
+
+        st.subheader("Ciclo CRISP-DM")
+        st.markdown("""
+1. **Entendimento do problema:** reunião com a chefia da Unidade de Vigilância Epidemiológica de Porto Alegre, entidade parceira do projeto.
+2. **Entendimento e preparação dos dados:** processamento dos arquivos mensais do PNI em partes, filtro por município de residência e atribuição do bairro pelo CEP completo (8 dígitos), disponível em 73% dos registros, com correspondência de 98,9%.
+3. **Modelagem:** agrupamento K-Means (K = 3) dos bairros e modelos de séries temporais (modelos de referência, SARIMA e Prophet).
+4. **Avaliação:** coeficiente de silhueta e inércia no agrupamento; MAE, RMSE e sMAPE nas séries temporais, em 4 semanas de teste.
+5. **Implantação:** esta interface, publicada no Streamlit Community Cloud.
+""")
+
+    with dir_:
+        st.subheader("Indicadores e critérios")
+        st.markdown("""
+- **População vacinada (%)** = pessoas vacinadas ao menos uma vez no período ÷ população da faixa etária no bairro (Censo 2022) × 100.
+- **Confiabilidade:** só são exibidas estimativas com pelo menos 30 vacinados, critério da Rede Interagencial de Informações para a Saúde (RIPSA).
+- **Bairros excluídos (6):** Farroupilha, Praia de Belas, Vila Conceição, Pedra Redonda e Navegantes, onde o CEP da unidade de saúde aparece registrado como residência de muitos pacientes, e Agronomia, onde predomina um CEP geral de avenida que atravessa vários bairros.
+- **Agrupamento:** 81 bairros com os 5 indicadores completos (influenza em 0 a 4, 60 a 69 e 70 anos ou mais; covid em 60 a 69 e 70 anos ou mais).
+- **Séries temporais:** 7 modelos comparados; o SARIMA(0,1,1)(0,1,1)₇ em escala logarítmica teve o menor erro em 5 das 6 séries.
+""")
+
+        st.subheader("Ética e LGPD")
+        st.markdown("""
+- Uso exclusivo de dados abertos do Ministério da Saúde, publicados conforme a Lei de Acesso à Informação (Lei 12.527/2011).
+- Os microdados não identificam os pacientes: o código do paciente é anonimizado na origem.
+- Os resultados são apresentados apenas de forma agregada por bairro, e grupos com menos de 30 pessoas não são exibidos, em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018).
+""")
+
+        st.subheader("Limitações")
+        st.markdown("""
+- Dados extraídos em 02/10/2026. O Ministério da Saúde atualiza os arquivos semanalmente, e os valores podem mudar em versões posteriores, sobretudo nas últimas semanas do período.
+- O indicador mede a vacinação no período de janeiro a setembro de 2026, e não a cobertura vacinal oficial do calendário.
+- A população de referência é a do Censo 2022.
+- A atribuição do bairro depende do CEP informado no registro de vacinação.
+""")
+
+        st.subheader("Equipe (UNIVESP · PI IV · 2026)")
+        st.markdown("""
+- Antonio Alexandre Martincues
+- Cleber Rodrigues Pereira
+- Gabriel Lima de Almeida
+- Igor dos Santos Gomes
+- Karen Kuniyoshi Nakaoka
+- Nina Maria Irma Soares Pinheiro Machado Rodrigues dos Santos
+- Patrick Lucas Almeida
+- Richard Miranda Pontes
+
+**Tutor:** Henrique Rodrigues Souza Silva
+""")
