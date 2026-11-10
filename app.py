@@ -184,5 +184,74 @@ with aba3:
                "distorção no registro do endereço. Dados insuficientes: bairros com menos de 30 "
                "vacinados em algum dos cinco indicadores.")
 
+@st.cache_data
+def carregar_previsao():
+    return pd.read_csv("dados/previsao_series_temporais.csv", parse_dates=["data"])
+
+
+@st.cache_data
+def carregar_comparacao():
+    return pd.read_csv("dados/comparacao_modelos.csv")
+
+
+NOMES_MODELOS = {
+    "Naive": "Ingênuo",
+    "Sazonal ingênuo (7d)": "Sazonal ingênuo (7 dias)",
+    "Média dia-semana 4sem": "Média por dia da semana (4 semanas)",
+    "SARIMA (busca)": "SARIMA (busca em grade)",
+    "SARIMA(0,1,1)(0,1,1)7": "SARIMA(0,1,1)(0,1,1)₇",
+    "SARIMA log": "SARIMA(0,1,1)(0,1,1)₇ em log",
+    "Prophet": "Prophet",
+}
+
 with aba4:
-    st.info("Em construção.")
+    serie_df = carregar_series()
+    prev = carregar_previsao()
+    comp = carregar_comparacao()
+
+    opcoes = {"Total de doses": "TOTAL"}
+    for cod in ["INF3", "COV-19 PFIZER-COMIRN", "INF4", "dT", "HB"]:
+        opcoes[NOMES_VACINAS.get(cod, cod)] = cod
+    escolha = st.selectbox("Série", list(opcoes))
+    cod = opcoes[escolha]
+
+    base = serie_df if cod == "TOTAL" else serie_df[serie_df["sg_imunobiologico"] == cod]
+    hist = (base[base["data_aplicacao"] <= "2026-09-25"]
+              .groupby("data_aplicacao")["total_doses_aplicadas"].sum()
+              .asfreq("D", fill_value=0).iloc[-90:])
+
+    comp_s = comp[comp["serie"] == cod].sort_values("RMSE")
+    melhor = comp_s.iloc[0]["modelo"]
+    st.markdown(f"**Modelo usado na previsão:** {NOMES_MODELOS.get(melhor, melhor)} "
+                "(menor RMSE no período de teste)")
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=hist.index, y=hist.values, name="Real (últimos 90 dias)",
+                             line=dict(color="gray"),
+                             hovertemplate="%{x|%d/%m/%Y}<br>%{y:,.0f} doses<extra></extra>"))
+    fig.add_trace(go.Scatter(x=prev["data"], y=prev[cod], name="Previsão (próximas 4 semanas)",
+                             line=dict(color="#1E8C6E", dash="dash"),
+                             hovertemplate="%{x|%d/%m/%Y}<br>%{y:,.0f} doses<extra></extra>"))
+    fig.update_layout(height=450, separators=",.", yaxis_title="Doses aplicadas por dia",
+                      legend=dict(orientation="h", y=-0.15), margin=dict(t=20))
+    fig.update_yaxes(tickformat=",d")
+    fig.update_xaxes(tickformat="%d/%m")
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.subheader("Comparação dos modelos no período de teste (29/08 a 25/09)")
+    tabela = (comp_s.assign(Modelo=comp_s["modelo"].map(NOMES_MODELOS))
+                    [["Modelo", "MAE", "RMSE", "sMAPE_%"]]
+                    .rename(columns={"sMAPE_%": "sMAPE (%)"}))
+    estilo = (tabela.style
+                    .format(precision=1, decimal=",", thousands=".",
+                            subset=["MAE", "RMSE", "sMAPE (%)"])
+                    .apply(lambda linha: ["background-color: #D5EFE6" if linha.name == tabela.index[0]
+                                          else "" for _ in linha], axis=1))
+    st.dataframe(estilo, hide_index=True, use_container_width=True)
+
+    st.caption("Os modelos foram treinados com os dados de 01/01 a 28/08/2026 e avaliados nas 4 "
+               "semanas seguintes. MAE: erro médio, em doses por dia. RMSE: raiz do erro quadrático "
+               "médio, que pesa mais os erros grandes. sMAPE: erro percentual. A previsão foi feita "
+               "com o modelo de menor RMSE, reajustado com toda a série até 25/09. O Dia D da "
+               "Multivacinação (22/08) foi substituído por um sábado típico, para não distorcer os "
+               "modelos. As previsões não consideram campanhas futuras nem feriados, como o de 12/10.")
