@@ -49,41 +49,106 @@ def fmt(n):
     return f"{n:,.0f}".replace(",", ".")
 
 
-st.title("Vacinação dos moradores de Porto Alegre — 2026")
-st.caption("Fonte: Programa Nacional de Imunizações (PNI), Ministério da Saúde. "
-           "Dados extraídos do Portal de Dados Abertos do SUS em 02/10/2026.")
+ESTILO = """
+<style>
+.block-container {padding-top: 2rem;}
+.faixa {background: #1B2A41; color: white; border-radius: 12px; padding: 1.4rem 1.8rem;
+        display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;}
+.faixa h1 {color: white; font-size: 1.7rem; margin: 0; padding: 0;}
+.faixa p {color: #C9D3E0; margin: 0.3rem 0 0 0; font-size: 0.95rem;}
+.selo {background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3);
+       border-radius: 20px; padding: 0.35rem 0.9rem; font-size: 0.85rem; color: #E6ECF3;
+       white-space: nowrap;}
+.cartao {background: white; border: 1px solid #E3E8EF; border-top: 5px solid var(--cor);
+         border-radius: 10px; padding: 1rem 1.2rem; height: 100%;}
+.cartao .rotulo {font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em;
+                 color: #5B6675; margin: 0;}
+.cartao .valor {font-size: 1.9rem; font-weight: 700; color: #1F2937; margin: 0.2rem 0;}
+.cartao .detalhe {font-size: 0.85rem; color: var(--cor); margin: 0;}
+button[data-baseweb="tab"] p {font-size: 1rem;}
+</style>
+"""
+st.markdown(ESTILO, unsafe_allow_html=True)
 
-aba1, aba2, aba3, aba4 = st.tabs(["Visão geral", "Vacinação por bairro",
-                                  "Níveis de adesão", "Séries temporais"])
+st.markdown("""
+<div class="faixa">
+  <div>
+    <h1>Vacinação dos moradores de Porto Alegre — 2026</h1>
+    <p>Projeto Integrador em Computação IV · UNIVESP · Entidade parceira: Vigilância Epidemiológica de Porto Alegre</p>
+  </div>
+  <div class="selo">Dados: PNI · extraídos em 02/10/2026</div>
+</div>
+""", unsafe_allow_html=True)
+
+aba1, aba2, aba3, aba4 = st.tabs(["📊 Visão geral", "🗺️ Vacinação por bairro",
+                                  "🧭 Níveis de adesão", "📈 Séries temporais"])
+
+def cartao(rotulo, valor, detalhe, cor):
+    return (f'<div class="cartao" style="--cor:{cor}"><p class="rotulo">{rotulo}</p>'
+            f'<p class="valor">{valor}</p><p class="detalhe">{detalhe}</p></div>')
+
+
+MESES = {1: "Jan", 2: "Fev", 3: "Mar", 4: "Abr", 5: "Mai", 6: "Jun",
+         7: "Jul", 8: "Ago", 9: "Set", 10: "Out", 11: "Nov", 12: "Dez"}
+
+NOMES_VACINAS = {
+    "INF3": "Influenza trivalente",
+    "COV-19 PFIZER-COMIRN": "Covid-19 (Pfizer)",
+    "INF4": "Influenza quadrivalente",
+    "dT": "Dupla adulto (difteria e tétano)",
+    "HB": "Hepatite B",
+    "VIP": "Poliomielite inativada (VIP)",
+    "DNG": "Dengue",
+    "MenACWY": "Meningocócica ACWY",
+    "VFA": "Febre amarela",
+    "SCR": "Tríplice viral (sarampo, caxumba e rubéola)",
+}
 
 with aba1:
     df = carregar_series()
+    diario = df.groupby("data_aplicacao")["total_doses_aplicadas"].sum()
+    dia_max = diario.idxmax()
 
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Doses aplicadas", fmt(df["total_doses_aplicadas"].sum()))
-    c2.metric("Período", f"{df['data_aplicacao'].min():%d/%m} a {df['data_aplicacao'].max():%d/%m/%Y}")
-    c3.metric("Vacinas diferentes", df["sg_imunobiologico"].nunique())
+    c1, c2, c3, c4 = st.columns(4)
+    c1.markdown(cartao("Doses aplicadas", fmt(df["total_doses_aplicadas"].sum()),
+                       "Em moradores de Porto Alegre", "#1F4E79"), unsafe_allow_html=True)
+    c2.markdown(cartao("Período", f"{diario.index.min():%d/%m} a {diario.index.max():%d/%m/%Y}",
+                       "Último dia com registro parcial", "#5B7DB1"), unsafe_allow_html=True)
+    c3.markdown(cartao("Vacinas diferentes", df["sg_imunobiologico"].nunique(),
+                       "Imunobiológicos registrados no PNI", "#1E8C6E"), unsafe_allow_html=True)
+    c4.markdown(cartao("Dia com mais doses", fmt(diario.max()),
+                       f"{dia_max:%d/%m} · Dia D contra a gripe", "#E0A526"), unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.subheader("Doses aplicadas por mês")
+    mensal = diario.groupby(diario.index.month).sum()
+    mensal_df = pd.DataFrame({"mes": [MESES[m] for m in mensal.index], "doses": mensal.values})
+    fig = px.line(mensal_df, x="mes", y="doses", markers=True,
+                  labels={"mes": "", "doses": "Doses aplicadas"})
+    fig.update_traces(line_color="#1F4E79", fill="tozeroy", fillcolor="rgba(31,78,121,0.12)",
+                      hovertemplate="%{x}<br>%{y:,.0f} doses<extra></extra>")
+    eventos = {"Abr": "Campanha contra a gripe<br>(Dia D em 11/04)",
+               "Jun": "Vacina da gripe liberada<br>para toda a população",
+               "Ago": "Dia D da<br>Multivacinação (22/08)"}
+    for mes, texto in eventos.items():
+        y = mensal_df.loc[mensal_df["mes"] == mes, "doses"].iloc[0]
+        fig.add_annotation(x=mes, y=y, text=texto, showarrow=True, arrowhead=2, ay=-50,
+                           font=dict(size=11, color="#1F2937"), bgcolor="white",
+                           bordercolor="#C9D3E0", borderpad=4)
+    fig.update_layout(separators=",.", height=430, margin=dict(t=30))
+    fig.update_yaxes(tickformat=",d", range=[0, mensal_df["doses"].max() * 1.3])
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption("Setembro inclui os registros até 26/09/2026.")
 
-    NOMES_VACINAS = {
-        "INF3": "Influenza trivalente",
-        "COV-19 PFIZER-COMIRN": "Covid-19 (Pfizer)",
-        "INF4": "Influenza quadrivalente",
-        "dT": "Dupla adulto (difteria e tétano)",
-        "HB": "Hepatite B",
-        "VIP": "Poliomielite inativada (VIP)",
-        "DNG": "Dengue",
-        "MenACWY": "Meningocócica ACWY",
-        "VFA": "Febre amarela",
-        "SCR": "Tríplice viral (sarampo, caxumba e rubéola)",
-    }
+    st.subheader("As 10 vacinas mais aplicadas")
     top = (df.groupby("sg_imunobiologico")["total_doses_aplicadas"].sum()
              .nlargest(10).sort_values().reset_index())
     top["vacina"] = top["sg_imunobiologico"].map(NOMES_VACINAS).fillna(top["sg_imunobiologico"])
     fig = px.bar(top, x="total_doses_aplicadas", y="vacina", orientation="h",
-                 labels={"total_doses_aplicadas": "Doses aplicadas", "vacina": ""})
-    fig.update_layout(separators=",.")
+                 labels={"total_doses_aplicadas": "Doses aplicadas", "vacina": ""},
+                 color_discrete_sequence=["#1F4E79"])
+    fig.update_traces(hovertemplate="%{y}<br>%{x:,.0f} doses<extra></extra>")
+    fig.update_layout(separators=",.", height=430)
     fig.update_xaxes(tickformat=",d")
-    st.subheader("As 10 vacinas mais aplicadas")
     st.plotly_chart(fig, use_container_width=True)
 
 with aba2:
