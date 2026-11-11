@@ -258,9 +258,32 @@ with aba3:
                   color_discrete_map=CORES_NIVEL, text_auto=".1f",
                   labels={"indicador": "", "valor": "População vacinada, média dos bairros (%)",
                           "nivel_adesao": "Nível de adesão"})
+    fig2.update_traces(
+    hovertemplate="<b>%{x}</b><br>"
+                  "Nível de adesão: %{fullData.name}<br>"
+                  "População vacinada (média dos bairros): %{y:.1f}%"
+                  "<extra></extra>"
+    )
     fig2.update_layout(separators=",.")
+
+
+
     st.plotly_chart(fig2, use_container_width=True)
 
+    st.subheader("Valores mínimos e máximos de cada nível")
+    st.markdown("Não há limites fixos entre os níveis: o K-Means classifica cada bairro pelo "
+                "conjunto dos 5 indicadores, e não por um valor isolado. Por isso, os intervalos "
+                "de níveis vizinhos podem se sobrepor.")
+    nomes_ind = {"inf_0a4": "Influenza 0 a 4 anos", "inf_60a69": "Influenza 60 a 69 anos",
+                 "inf_70mais": "Influenza 70 anos ou mais", "cov_60a69": "Covid 60 a 69 anos",
+                 "cov_70mais": "Covid 70 anos ou mais"}
+    faixas_niv = pd.DataFrame({"Indicador": list(nomes_ind.values())})
+    for nivel in ["Baixa", "Intermediária", "Alta"]:
+        sub = clus.loc[clus["nivel_adesao"] == nivel, list(nomes_ind)]
+        faixas_niv[f"Adesão {nivel.lower()}"] = [
+            f"{pct(sub[c].min())} a {pct(sub[c].max())}" for c in nomes_ind]
+    st.dataframe(faixas_niv, hide_index=True, use_container_width=True)
+    
     st.subheader("Bairros de cada nível")
     colunas = st.columns(3)
     for coluna, nivel in zip(colunas, ["Baixa", "Intermediária", "Alta"]):
